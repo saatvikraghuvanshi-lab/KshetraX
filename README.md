@@ -364,7 +364,23 @@ git push origin main
 
 ---
 
-## 👥 Team
+## 🏆 Hackathon Achievement
+
+<p align="center">
+  <strong>🥇 Craft N Code D3 Fest — Finalists</strong><br/>
+  Cyber Space Club × IIIT Bhubaneshwar
+</p>
+
+**KshetraX** was built for the **Craft N Code D3 Fest** hackathon, organized by **Cyber Space Club** in collaboration with **IIIT Bhubaneshwar**. Our team **Codoholics** placed **Top 20 out of hundreds of teams** across India, making it past all elimination rounds to become **Finalists**.
+
+---
+
+## 👥 Team Codoholics
+
+| Name | Role |
+|------|------|
+| **Saatvik Raghuvanshi** | Full-Stack Development, System Architecture |
+| *(add your teammates here)* | |
 
 Built with ❤️ for Indian farmers.
 
