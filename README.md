@@ -384,7 +384,7 @@ git push origin main
 | Name | Role |
 |------|------|
 | **Saatvik Raghuvanshi** | Full-Stack Development, System Architecture |
-| *(add your teammates here)* | |
+| **Dhruv Hajela** | Full-Stack Development, System Architecture |
 
 Built with ❤️ for Indian farmers.
 
