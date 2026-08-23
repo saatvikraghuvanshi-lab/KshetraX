@@ -12,6 +12,10 @@
   <img src="https://img.shields.io/badge/License-MIT-yellow" />
 </p>
 
+<p align="center">
+  <img src="https://img.shields.io/badge/🏆_Hackathon-Finalist%20Top%2020-gold?style=for-the-badge" />
+</p>
+
 ---
 
 ## 📋 Problem Statement
