@@ -375,7 +375,7 @@ git push origin main
   Cyber Space Club × IIIT Bhubaneshwar
 </p>
 
-**KshetraX** was built for the **Craft N Code D3 Fest** hackathon, organized by **Cyber Space Club** in collaboration with **IIIT Bhubaneshwar**. Our team **Codoholics** placed **Top 20 out of hundreds of teams** across India, making it past all elimination rounds to become **Finalists**.
+**KshetraX** was built for the **Craft N Code D3 Fest** hackathon, organized by **Cyber Space Club** in collaboration with **IIIT Bhubaneshwar**. Our team **Codoholics** placed **Top 20 out of approximately 400 teams** across the college, making it past all elimination rounds to become **Finalists**.
 
 ---
 
@@ -386,7 +386,6 @@ git push origin main
 | **Saatvik Raghuvanshi** | System Architecture, Frontend, Workflow Automation, Tech Stack, Testing & Data Analysis, Map Integration, Backend Integration |
 | **Dhruv Hajela** | Data Gathering, Resources, PRD, User Workflow Design, Presentation |
 
-Built with ❤️ for Indian farmers.
 
 ---
 
