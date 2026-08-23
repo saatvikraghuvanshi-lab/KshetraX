@@ -383,8 +383,8 @@ git push origin main
 
 | Name | Role |
 |------|------|
-| **Saatvik Raghuvanshi** | Full-Stack Development, System Architecture |
-| **Dhruv Hajela** | Full-Stack Development, System Architecture |
+| **Saatvik Raghuvanshi** | System Architecture, Frontend, Workflow Automation, Tech Stack, Testing & Data Analysis, Map Integration, Backend Integration |
+| **Dhruv Hajela** | Data Gathering, Resources, PRD, User Workflow Design, Presentation |
 
 Built with ❤️ for Indian farmers.
 
