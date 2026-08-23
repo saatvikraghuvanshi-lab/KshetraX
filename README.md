@@ -33,6 +33,25 @@ Millions of farmers in India face crop losses due to drought, irregular rainfall
 
 ---
 
+## 📸 Screenshots
+
+<table>
+  <tr>
+    <td align="center"><img src="docs/images/KX1.png" width="100%" /><br /><sub><b>Dashboard</b> — Plot overview with map and stats</sub></td>
+    <td align="center"><img src="docs/images/KX2.png" width="100%" /><br /><sub><b>Land Plots</b> — All insured plots with status</sub></td>
+  </tr>
+  <tr>
+    <td align="center"><img src="docs/images/KX3.png" width="100%" /><br /><sub><b>Claims</b> — Trigger events and claim history</sub></td>
+    <td align="center"><img src="docs/images/KX4.png" width="100%" /><br /><sub><b>Landing Page</b> — Instant, fair crop insurance</sub></td>
+  </tr>
+  <tr>
+    <td align="center"><img src="docs/images/KX5.png" width="100%" /><br /><sub><b>Register Plot</b> — Easy plot registration wizard</sub></td>
+    <td align="center"><img src="docs/images/KX6.png" width="100%" /><br /><sub><b>Before vs After</b> — Traditional vs Parametric insurance</sub></td>
+  </tr>
+</table>
+
+---
+
 ## 🔄 How It Works
 
 ```
