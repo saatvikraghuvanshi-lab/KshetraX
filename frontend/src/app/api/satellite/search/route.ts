@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+export const dynamic = "force-dynamic";
 import { searchStacItems, interpretNdvi } from "@/lib/satelliteService";
 
 export async function GET(req: NextRequest) {

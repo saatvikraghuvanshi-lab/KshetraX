@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+export const dynamic = "force-dynamic";
 import { CROP_SENSITIVITY } from "@/lib/config";
 
 export async function GET() {

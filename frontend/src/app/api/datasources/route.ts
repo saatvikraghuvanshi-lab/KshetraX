@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+export const dynamic = "force-dynamic";
 import { searchStacItems, fetchRealWeatherData, fetchSmapSoilMoisture } from "@/lib/satelliteService";
 
 export async function GET() {
