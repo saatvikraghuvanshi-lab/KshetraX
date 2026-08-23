@@ -1,0 +1,270 @@
+// Prisma Schema for KshetraX
+// Parametric Crop Insurance - Satellite Payout Engine
+// Using SQLite for MVP (easy local setup)
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// ─── Farmer & Plot Registration ───────────────────────────
+
+model Farmer {
+  id        String   @id @default(cuid())
+  name      String
+  phone     String   @unique
+  email     String?
+  aadhaar   String?  @unique
+  village   String
+  district  String
+  state     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  plots Plot[]
+}
+
+model Plot {
+  id          String   @id @default(cuid())
+  name        String
+  areaHectares Float
+
+  // GeoJSON polygon coordinates (stored as JSON string)
+  coordinates String   // JSON: [[lat,lng],[lat,lng],...]
+
+  // Center point for map display
+  centerLat   Float
+  centerLng   Float
+
+  // Crop details
+  cropType    String   // rice, wheat, pulses, cotton, sugarcane
+  cropSeason  String   // kharif, rabi, zaid
+  sowingDate  DateTime
+  harvestDate DateTime?
+
+  // Linked weather station
+  stationId   String?
+  stationName String?
+  stationDist Float?   // distance in km
+
+  // STAC tile reference
+  stacTileId  String?
+
+  // Linked satellite tile
+  satelliteTile String?  // Sentinel-2 tile name
+
+  // Metadata
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  farmerId    String
+  farmer      Farmer   @relation(fields: [farmerId], references: [id])
+
+  // Insurance
+  insurance   Insurance?
+  weatherData WeatherData[]
+  triggers    Trigger[]
+  payouts     Payout[]
+  yieldHistory YieldHistory[]
+}
+
+// ─── Insurance Policy ────────────────────────────────────
+
+model Insurance {
+  id              String   @id @default(cuid())
+  policyNumber    String   @unique
+  startDate       DateTime
+  endDate         DateTime
+
+  // Premium calculated from risk index
+  premiumAmount   Float
+  premiumPerHectare Float
+  sumInsured      Float   // maximum payout
+
+  // Risk parameters
+  riskScore       Float   // 0-100
+  rainfallDeviationThreshold Float @default(30)  // trigger at 30% deficit
+  ndviDropThreshold Float @default(25)           // trigger at 25% NDVI drop
+  soilMoistureThreshold Float @default(40)       // trigger at 40% deficit
+
+  status          String  @default("active") // active, expired, claimed
+
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  // Relations
+  plotId          String  @unique
+  plot            Plot    @relation(fields: [plotId], references: [id])
+}
+
+// ─── Weather Data ────────────────────────────────────────
+
+model WeatherData {
+  id            String   @id @default(cuid())
+  date          DateTime
+
+  // Actual measurements
+  rainfallMm    Float    @default(0)
+  temperatureC  Float
+  humidity      Float
+  soilMoisture  Float?   // percentage 0-100
+  windSpeed     Float?
+  evapotranspiration Float?
+
+  // Historical normal for this date
+  normalRainfall    Float  // historical average rainfall for this date
+  normalTemperature Float  // historical average temperature
+
+  // Deviation from normal
+  rainfallDeviation Float  // percentage deviation from normal
+
+  // NDVI from satellite
+  ndvi          Float?   // -1 to 1 (vegetation index)
+  ndviAnomaly   Float?   // deviation from historical NDVI
+
+  // Source
+  source        String   // "imd", "openweather", "synthetic"
+  fetchedAt     DateTime @default(now())
+
+  // Relations
+  plotId        String
+  plot          Plot     @relation(fields: [plotId], references: [id])
+
+  @@unique([plotId, date])
+}
+
+// ─── Trigger Events ──────────────────────────────────────
+
+model Trigger {
+  id            String   @id @default(cuid())
+  date          DateTime @default(now())
+
+  // What triggered
+  triggerType   String   // "rainfall_deficit", "ndvi_drop", "combined"
+  severity      String   // "minor", "moderate", "severe"
+
+  // Values at trigger
+  rainfallDeviation Float  // actual deviation %
+  ndviDrop          Float? // NDVI drop %
+  soilMoistureDeficit Float?
+
+  // Threshold that was crossed
+  thresholdCrossed  Float   // which % threshold was breached
+
+  // Plain language explanation
+  explanation       String
+
+  // Payout percentage calculated
+  payoutPercentage  Float
+
+  status          String @default("active") // active, paid, expired
+  acknowledgedAt  DateTime?
+
+  createdAt       DateTime @default(now())
+
+  // Relations
+  plotId          String
+  plot            Plot   @relation(fields: [plotId], references: [id])
+  payout          Payout?
+}
+
+// ─── Payouts ─────────────────────────────────────────────
+
+model Payout {
+  id              String   @id @default(cuid())
+  payoutNumber    String   @unique
+  date            DateTime @default(now())
+
+  // Amount
+  payoutAmount    Float
+  payoutPercentage Float   // % of sum insured
+  calculationBasis String // plain explanation of formula
+
+  // Formula breakdown
+  baseAmount      Float   // sum insured
+  triggerSeverity String
+  multiplierApplied Float // slab multiplier
+
+  // Status
+  status          String @default("pending") // pending, processing, disbursed
+  disbursedAt     DateTime?
+  transactionId   String?
+
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  // Relations
+  plotId          String
+  plot            Plot    @relation(fields: [plotId], references: [id])
+  triggerId       String  @unique
+  trigger         Trigger @relation(fields: [triggerId], references: [id])
+}
+
+// ─── Risk Index Historical Data ──────────────────────────
+
+model RiskIndex {
+  id              String   @id @default(cuid())
+  date            DateTime
+
+  // Composite risk index
+  compositeScore  Float    // 0-100
+
+  // Individual components
+  rainfallRisk    Float    // 0-100
+  ndviRisk        Float    // 0-100
+  soilMoistureRisk Float   // 0-100
+  historicalYieldRisk Float // based on past yields
+
+  // Weather station
+  stationId       String
+  stationName     String
+
+  createdAt       DateTime @default(now())
+
+  @@unique([stationId, date])
+}
+
+// ─── Historical Yield Data ───────────────────────────────
+// Per-crop annual yield data for correlation analysis
+
+model YieldHistory {
+  id              String   @id @default(cuid())
+  year            Int      // e.g. 2020
+  season          String   // "kharif" or "rabi"
+
+  // Yield data
+  actualYield     Float    // tonnes per hectare
+  expectedYield   Float    // tonnes per hectare (historical avg)
+  yieldDeviation  Float    // percentage deviation from expected
+
+  // Weather correlation
+  totalRainfall   Float    // mm for the season
+  avgTemperature  Float    // °C for the season
+  avgNdvi         Float?   // peak NDVI during season
+  droughtEvents   Int      @default(0) // number of drought events that year
+
+  // Metadata
+  source          String   // "government", "satellite", "synthetic"
+
+  createdAt       DateTime @default(now())
+
+  // Relations
+  plotId          String
+  plot            Plot     @relation(fields: [plotId], references: [id])
+
+  @@unique([plotId, year, season])
+}
+
+// ─── System Configuration ────────────────────────────────
+
+model SystemConfig {
+  id        String   @id @default(cuid())
+  key       String   @unique
+  value     String
+  updatedAt DateTime @updatedAt
+}
