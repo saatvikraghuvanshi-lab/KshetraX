@@ -60,57 +60,7 @@ Millions of farmers in India face crop losses due to drought, irregular rainfall
 
 ---
 
-## 🚀 Getting Started
-
-### Prerequisites
-
-- Node.js 18+ installed
-- npm or yarn
-
-### 1. Clone the Repository
-
-```bash
-git clone https://github.com/saatvikraghuvanshi-lab/KshetraX.git
-cd KshetraX
-```
-
-### 2. Install Dependencies
-
-```bash
-# Install backend dependencies
-cd backend && npm install
-
-# Install frontend dependencies
-cd ../frontend && npm install
-
-# Install root dependencies (for concurrently)
-cd .. && npm install
-```
-
-### 3. Setup Database
-
-```bash
-cd backend
-npx prisma generate
-npx prisma db push
-npx ts-node prisma/seed.ts
-```
-
-### 4. Run the Application
-
-```bash
-# From root directory - runs both backend and frontend
-npm run dev
-
-# Or run separately:
-# Backend (port 4000)
-cd backend && npm run dev
-
-# Frontend (port 3000)
-cd frontend && npm run dev
-```
-
-### 5. Access the Application
+###. Access the Application
 
 | Component | URL | Description |
 |-----------|-----|-------------|
@@ -217,6 +167,26 @@ Payout = Sum Insured × Tier Multiplier
 | 🟡 Minor | 0-30% | 25% of sum insured |
 | 🟠 Moderate | 30-60% | 50% of sum insured |
 | 🔴 Severe | 60%+ | 100% of sum insured |
+
+---
+
+## 🏆 Hackathon Achievement
+
+<p align="center">
+  <strong>🥇 Craft N Code D3 Fest — Finalists</strong><br/>
+  Cyber Space Club × IIIT Bhubaneshwar
+</p>
+
+**KshetraX** was built for the **Craft N Code D3 Fest** hackathon, organized by **Cyber Space Club** in collaboration with **IIIT Bhubaneshwar**. Our team **Codoholics** placed **Top 20 out of approximately 400 teams** across the college, making it past all elimination rounds to become **Finalists**.
+
+---
+
+## 👥 Team Codoholics
+
+| Name | Role |
+|------|------|
+| **Saatvik Raghuvanshi** | System Architecture, Frontend, Workflow Automation, Tech Stack, Testing & Data Analysis, Map Integration, Backend Integration |
+| **Dhruv Hajela** | Data Gathering, Resources, PRD, User Workflow Design, Presentation |
 
 ---
 
@@ -347,6 +317,56 @@ The system uses 8 interconnected tables:
 
 ---
 
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js 18+ installed
+- npm or yarn
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/saatvikraghuvanshi-lab/KshetraX.git
+cd KshetraX
+```
+
+### 2. Install Dependencies
+
+```bash
+# Install backend dependencies
+cd backend && npm install
+
+# Install frontend dependencies
+cd ../frontend && npm install
+
+# Install root dependencies (for concurrently)
+cd .. && npm install
+```
+
+### 3. Setup Database
+
+```bash
+cd backend
+npx prisma generate
+npx prisma db push
+npx ts-node prisma/seed.ts
+```
+
+### 4. Run the Application
+
+```bash
+# From root directory - runs both backend and frontend
+npm run dev
+
+# Or run separately:
+# Backend (port 4000)
+cd backend && npm run dev
+
+# Frontend (port 3000)
+cd frontend && npm run dev
+```
+
 ## 🚀 Deployment
 
 | Platform | Component | URL |
@@ -364,28 +384,6 @@ git push origin main
 # 2. Deploy backend on Railway (add PostgreSQL, set DATABASE_URL)
 # 3. Deploy frontend on Vercel (set NEXT_PUBLIC_API_URL to your Railway URL)
 # 4. Update CORS_ORIGIN on Railway to your Vercel URL
-```
-
----
-
-## 🏆 Hackathon Achievement
-
-<p align="center">
-  <strong>🥇 Craft N Code D3 Fest — Finalists</strong><br/>
-  Cyber Space Club × IIIT Bhubaneshwar
-</p>
-
-**KshetraX** was built for the **Craft N Code D3 Fest** hackathon, organized by **Cyber Space Club** in collaboration with **IIIT Bhubaneshwar**. Our team **Codoholics** placed **Top 20 out of approximately 400 teams** across the college, making it past all elimination rounds to become **Finalists**.
-
----
-
-## 👥 Team Codoholics
-
-| Name | Role |
-|------|------|
-| **Saatvik Raghuvanshi** | System Architecture, Frontend, Workflow Automation, Tech Stack, Testing & Data Analysis, Map Integration, Backend Integration |
-| **Dhruv Hajela** | Data Gathering, Resources, PRD, User Workflow Design, Presentation |
-
 
 ---
 
