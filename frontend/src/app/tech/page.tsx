@@ -33,16 +33,19 @@ function DataSourcesStatus() {
   const StatusDot = ({ status }: { status: string }) => (
     <span className={`w-2.5 h-2.5 rounded-full inline-block ${
       status === 'available' ? 'bg-[#4D8B64]' :
-      status.includes('synthetic') ? 'bg-[#E2A93B]' : 'bg-[#717973]'
+      status?.includes('synthetic') ? 'bg-[#E2A93B]' : 'bg-[#717973]'
+
     }`} />
   );
 
   const StatusLabel = ({ status }: { status: string }) => (
     <span className={`font-caption text-caption ${
       status === 'available' ? 'text-[#4D8B64]' :
-      status.includes('synthetic') ? 'text-[#E2A93B]' : 'text-[#717973]'
+      status?.includes('synthetic') ? 'text-[#E2A93B]' : 'text-[#717973]'
+
     }`}>
       {status === 'available' ? 'Live' : status.includes('synthetic') ? 'Synthetic' : 'Not Integrated'}
+
     </span>
   );
 
