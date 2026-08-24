@@ -51,6 +51,7 @@ Millions of farmers in India face crop losses due to drought, irregular rainfall
 </table>
 
 ---
+Pitch Deck: https://docs.google.com/presentation/d/1If0WOYXpyGwg4jkCoqONsXokCpJVwE0e5oh0zTKkmhE/edit?usp=sharing
 
 ## 🔄 How It Works
 
